@@ -43,3 +43,23 @@ cd STARTER-DJANGO
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+```
+
+---
+
+## Set Up Virtual Environment
+
+Open a terminal and run:
+
+```bash
+python -m venv envro
+```
+Windows
+```bash
+envro\Scripts\activate
+```
+macOS/Linux
+```bash
+source envro/bin/activate
+```
+
