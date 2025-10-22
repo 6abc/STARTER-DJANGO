@@ -59,6 +59,9 @@ Open a terminal and run:
 git clone https://github.com/6abc/STARTER-DJANGO.git -b AUTH_ADMIN
 cd STARTER-DJANGO
 pip install -r requirements.txt
+python manage.py makemigrations accounts
+python manage.py migrate accounts
+python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
