@@ -1,0 +1,157 @@
+<!-- templates/accounts/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home - Secure Auth System{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<div class="bg-success text-white py-5 px-3 mb-5 shadow rounded">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+
+                {% if user.is_authenticated %}
+                    <h1 class="display-4 fw-bold mb-3">
+                        Welcome, {{ user.username }}! 👋
+                    </h1>
+                    <p class="lead mb-4">
+                        You’re securely logged in. Explore your profile, update your password, or continue using the app.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="{% url 'profile' %}" class="btn btn-light btn-lg px-4">
+                            <i class="bi bi-person-circle"></i> View Profile
+                        </a>
+                    </div>
+                {% else %}
+                    <h1 class="display-4 fw-bold mb-4">
+                        Secure Authentication System
+                    </h1>
+                    <p class="lead mb-4">
+                        Create an account or log in to access secure features and manage your profile safely.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="{% url 'register' %}" class="btn btn-light btn-lg px-4">
+                            <i class="bi bi-person-plus"></i> Get Started
+                        </a>
+                        <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-box-arrow-in-right"></i> Login
+                        </a>
+                    </div>
+                
+            </div>
+
+            <div class="col-lg-6 text-center">
+                <i class="bi bi-shield-lock" style="font-size: 15rem; opacity: 0.2;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- How It Works Section -->
+<div class="py-5 px-5 mb-5 shadow" style="margin-left: -12px; margin-right: -12px;">
+    <div class="container">
+        <h2 class="text-center mb-5">How It Works</h2>
+        <div class="row g-4">
+            <div class="col-md-3 text-center border-0 shadow-sm">
+                <div class="mb-3">
+                    <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fs-4 fw-bold">1</span>
+                    </div>
+                </div>
+                <h5>Register</h5>
+                <p class="text-muted">Create your account with username, email, and password</p>
+            </div>
+            <div class="col-md-3 text-center border-0 shadow-sm">
+                <div class="mb-3">
+                    <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fs-4 fw-bold">2</span>
+                    </div>
+                </div>
+                <h5>Wait for Approval</h5>
+                <p class="text-muted">Admin reviews and activates your account</p>
+            </div>
+            <div class="col-md-3 text-center border-0 shadow-sm">
+                <div class="mb-3">
+                    <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fs-4 fw-bold">3</span>
+                    </div>
+                </div>
+                <h5>Login</h5>
+                <p class="text-muted">Access your account once approved</p>
+            </div>
+            <div class="col-md-3 text-center border-0 shadow-sm">
+                <div class="mb-3">
+                    <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fs-4 fw-bold">4</span>
+                    </div>
+                </div>
+                <h5>Manage</h5>
+                <p class="text-muted">Update your profile and settings anytime</p>
+            </div>
+        </div>
+        <!-- Features Section -->
+        <div class="container mb-5 mt-5">
+            <h2 class="text-center mb-5">Key Features</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="bi bi-shield-check text-primary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">Admin Approval</h5>
+                            <p class="card-text text-muted">
+                                All new user registrations require admin approval before access is granted, ensuring complete control over your user base.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="bi bi-lock text-primary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">Secure Authentication</h5>
+                            <p class="card-text text-muted">
+                                Robust authentication system with secure password hashing and session management.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="bi bi-person-gear text-primary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">User Management</h5>
+                            <p class="card-text text-muted">
+                                Complete user profile management with password change functionality and account settings.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="container text-center mb-5">
+    <div class="card border-primary shadow">
+        <div class="card-body p-5">
+            <h3 class="mb-3">Ready to Get Started?</h3>
+            <p class="lead text-muted mb-4">
+                Join our secure platform today and experience hassle-free authentication.
+            </p>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-5">
+                <i class="bi bi-person-plus"></i> Create Your Account
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
