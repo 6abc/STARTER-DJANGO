@@ -1,0 +1,105 @@
+<!-- templates/accounts/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}APP - Secure Auth System{% endblock %}
+
+{% block content %}
+<main role="main" class="container mt-3">
+      <div class="card">
+        <h1 class="card-header">Question & Answer</h1>
+        <div class="card-body">
+          <form>
+            <table class="table table-bordered align-middle">
+                <colgroup>
+                  <col style="width: 5%;"> 
+                  <col style="width: 5%;"> 
+                  <col style="width: 50%;"> <!-- question column -->
+                  <col style="width: 8%;">
+                  <col style="width: 8%;">
+                  <col style="width: 8%;">
+                  <col style="width: 8%;">
+                  <col style="width: 8%;">
+                </colgroup>
+              <thead class="table">
+                <tr class="text-center">
+                  <th>Help</th>
+                  <th>#</th>
+                  <th>Question</th>
+                  <th>1️⃣</th>
+                  <th>2️⃣</th>
+                  <th>3️⃣</th>
+                  <th>4️⃣</th>
+                  <th>5️⃣</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center"><a href="#" class="text-decoration-none"><i class="bi bi-question-square-fill h2"></i></a></td>
+                  <td class="text-center"><i class="bi bi-1-square h2"></i></td>
+                  <td class="text-start">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto eligendi quam dolor tempore vel quasi, temporibus harum voluptatum aperiam, voluptate, commodi quis repudiandae maiores recusandae libero quia totam similique eius!</td>
+                <td>
+                  <label>
+                    <input type="radio" name="q1" value="1"><div class="option-box">Regulary</div>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" name="q1" value="2"><div class="option-box">Very Offten</div>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" name="q1" value="3"><div class="option-box">Every Day</div>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" name="q1" value="4"><div class="option-box">Sometime</div>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" name="q1" value="5"><div class="option-box">Offten</div>
+                  </label>
+                </td>
+                </tr>
+                <tr>
+                  <td class="text-center"><a href="#" class="text-decoration-none"><i class="bi bi-question-square-fill h2"></i></a></td>
+                  <td class="text-center"><i class="bi bi-2-square h2"></i></td>
+                  <td class="text-start">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto eligendi quam dolor tempore vel quasi, temporibus harum voluptatum aperiam, voluptate, commodi quis repudiandae maiores recusandae libero quia totam similique eius!</td>
+                <td>
+                  <label>
+                    <input type="radio" name="q2" value="1"><div class="option-box">Regulary</div>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" name="q2" value="2"><div class="option-box">Very Offten</div>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" name="q2" value="3"><div class="option-box">Every Day</div>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" name="q2" value="4"><div class="option-box">Sometime</div>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input type="radio" name="q2" value="5"><div class="option-box">Offten</div>
+                  </label>
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary mt-3 btn-lg">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+{% endblock %}
