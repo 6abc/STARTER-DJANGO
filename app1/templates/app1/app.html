@@ -1,105 +1,110 @@
-<!-- templates/accounts/login.html -->
 {% extends 'base.html' %}
 
 {% block title %}APP - Secure Auth System{% endblock %}
 
 {% block content %}
 <main role="main" class="container mt-3">
-      <div class="card">
-        <h1 class="card-header">Question & Answer</h1>
-        <div class="card-body">
-          <form>
-            <table class="table table-bordered align-middle">
-                <colgroup>
-                  <col style="width: 5%;"> 
-                  <col style="width: 5%;"> 
-                  <col style="width: 50%;"> <!-- question column -->
-                  <col style="width: 8%;">
-                  <col style="width: 8%;">
-                  <col style="width: 8%;">
-                  <col style="width: 8%;">
-                  <col style="width: 8%;">
-                </colgroup>
-              <thead class="table">
-                <tr class="text-center">
-                  <th>Help</th>
-                  <th>#</th>
-                  <th>Question</th>
-                  <th>1️⃣</th>
-                  <th>2️⃣</th>
-                  <th>3️⃣</th>
-                  <th>4️⃣</th>
-                  <th>5️⃣</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center"><a href="#" class="text-decoration-none"><i class="bi bi-question-square-fill h2"></i></a></td>
-                  <td class="text-center"><i class="bi bi-1-square h2"></i></td>
-                  <td class="text-start">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto eligendi quam dolor tempore vel quasi, temporibus harum voluptatum aperiam, voluptate, commodi quis repudiandae maiores recusandae libero quia totam similique eius!</td>
-                <td>
-                  <label>
-                    <input type="radio" name="q1" value="1"><div class="option-box">Regulary</div>
-                  </label>
-                </td>
-                <td>
-                  <label>
-                    <input type="radio" name="q1" value="2"><div class="option-box">Very Offten</div>
-                  </label>
-                </td>
-                <td>
-                  <label>
-                    <input type="radio" name="q1" value="3"><div class="option-box">Every Day</div>
-                  </label>
-                </td>
-                <td>
-                  <label>
-                    <input type="radio" name="q1" value="4"><div class="option-box">Sometime</div>
-                  </label>
-                </td>
-                <td>
-                  <label>
-                    <input type="radio" name="q1" value="5"><div class="option-box">Offten</div>
-                  </label>
-                </td>
-                </tr>
-                <tr>
-                  <td class="text-center"><a href="#" class="text-decoration-none"><i class="bi bi-question-square-fill h2"></i></a></td>
-                  <td class="text-center"><i class="bi bi-2-square h2"></i></td>
-                  <td class="text-start">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto eligendi quam dolor tempore vel quasi, temporibus harum voluptatum aperiam, voluptate, commodi quis repudiandae maiores recusandae libero quia totam similique eius!</td>
-                <td>
-                  <label>
-                    <input type="radio" name="q2" value="1"><div class="option-box">Regulary</div>
-                  </label>
-                </td>
-                <td>
-                  <label>
-                    <input type="radio" name="q2" value="2"><div class="option-box">Very Offten</div>
-                  </label>
-                </td>
-                <td>
-                  <label>
-                    <input type="radio" name="q2" value="3"><div class="option-box">Every Day</div>
-                  </label>
-                </td>
-                <td>
-                  <label>
-                    <input type="radio" name="q2" value="4"><div class="option-box">Sometime</div>
-                  </label>
-                </td>
-                <td>
-                  <label>
-                    <input type="radio" name="q2" value="5"><div class="option-box">Offten</div>
-                  </label>
-                </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary mt-3 btn-lg">Submit</button>
+  <div class="card">
+    <h1 class="card-header">Question & Answer</h1>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <table class="table table-bordered align-middle">
+          <thead class="table">
+            <tr class="text-center">
+              <th>Help</th>
+              <th>#</th>
+              <th>Question</th>
+              <th>1️⃣</th>
+              <th>2️⃣</th>
+              <th>3️⃣</th>
+              <th>4️⃣</th>
+              <th>5️⃣</th>
+            </tr>
+          </thead>
+<tbody>
+  {% for question in questions %}
+  <tr>
+
+    <!-- HELP BUTTON SLIDE SHOW -->
+    <td class="text-center">
+      {% if question.help_text %}
+        <!-- Button trigger modal -->
+        <a href="#" 
+          data-bs-toggle="modal" 
+          data-bs-target="#helpModal{{ question.id }}"
+          class="text-decoration-none">
+          <i class="bi bi-question-square-fill h2"></i>
+        </a>
+
+        <!-- Bootstrap Modal -->
+        <div class="modal fade" id="helpModal{{ question.id }}" tabindex="-1" aria-labelledby="helpModalLabel{{ question.id }}" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="helpModalLabel{{ question.id }}">Help — Question {{ forloop.counter }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+
+                <!-- 🖼️ Image Slideshow (Bootstrap Carousel) -->
+                {% if question.images.all %}
+                  <div id="carousel{{ question.id }}" class="carousel slide mb-3" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      {% for img in question.images.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                          <img src="{{ img.image.url }}" class="d-block w-100 rounded" alt="Image for {{ question }}">
+                        </div>
+                      {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ question.id }}" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ question.id }}" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                {% endif %}
+
+                <!-- Help text -->
+                <p>{{ question.help_text }}</p>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
-    </main>
+      {% endif %}
+    </td>
+
+
+    <td class="text-center"><i class="bi bi-{{ forloop.counter }}-square h2"></i></td>
+    <td class="text-start">{{ question.text }}</td>
+
+    {% for value, label in question.choices %}
+    <td class="text-center">
+      <label>
+        <input type="radio" name="question_{{ question.id }}" value="{{ value }}" required>
+        <div class="option-box">{{ label }}</div>
+      </label>
+    </td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</tbody>
+
+
+        </table>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3 btn-lg">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
 {% endblock %}
