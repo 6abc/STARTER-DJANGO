@@ -20,27 +20,36 @@ def get_default_interface():
 def index(request):
     interface = get_default_interface()
     command = ["/usr/sbin/arp-scan", "-I", interface, "--localnet"]
-    devices = [] # This will hold our list of dictionaries
+    
+    devices = []
+    dynamic_mac_count = 0
+    vendor_mac_count = 0
+    unknown_mac_count = 0
 
     try:
         result = subprocess.run(command, capture_output=True, text=True)
         output = result.stdout
-        
-        # Regex explanation:
-        # ([\d\.]+)       -> Group 1: Matches the IP (digits and dots)
-        # \s+             -> Matches the whitespace/tab
-        # ([0-9a-f:]{17}) -> Group 2: Matches the MAC address (hex and colons)
-        # \s+             -> Matches the whitespace/tab
-        # (.*)            -> Group 3: Matches everything else (Vendor name)
         regex_pattern = r"^([\d\.]+)\s+([0-9a-f:]{17})\s+(.*)$"
         
         for line in output.splitlines():
             match = re.search(regex_pattern, line, re.IGNORECASE)
             if match:
+                vendor_str = match.group(3).strip()
+                v_lower = vendor_str.lower()
+                
+                # Logic to categorize MAC types
+                if "locally administered" in v_lower:
+                    dynamic_mac_count += 1
+                elif "unknown" in v_lower:
+                    unknown_mac_count += 1
+                else:
+                    # If it's not dynamic and not unknown, it's a recognized Vendor
+                    vendor_mac_count += 1
+                
                 devices.append({
                     'ip': match.group(1),
                     'mac': match.group(2),
-                    'vendor': match.group(3)
+                    'vendor': vendor_str
                 })
                 
     except Exception as e:
@@ -48,6 +57,9 @@ def index(request):
 
     return render(request, 'app1/index.html', {
         'devices': devices,
+        'dynamic_count': dynamic_mac_count,
+        'vendor_count': vendor_mac_count,
+        'unknown_count': unknown_mac_count, # Pass to template
         'interface': interface,
-        'raw_output': output # Kept just in case you want to debug
+        'raw_output': output
     })

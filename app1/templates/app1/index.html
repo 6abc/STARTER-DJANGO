@@ -6,7 +6,49 @@
     <h2>Network Scan Results</h2>
     <p class="text-muted">Interface: <strong>{{ interface }}</strong></p>
 
-    <table class="table table-striped table-bordered mt-3 table-hover">
+    <div class="container mt-4 mb-2">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 text-center">
+            
+            <div class="col">
+                <div class="card h-100 shadow-lg border-0 border-top border-primary border-4">
+                    <div class="card-body">
+                        <h6 class="card-title text-uppercase text-muted small fw-bold">Total Devices</h6>
+                        <p class="card-text display-6 fw-bold text-primary">{{ devices|length }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-lg border-0 border-top border-success border-4">
+                    <div class="card-body">
+                        <h6 class="card-title text-uppercase text-muted small fw-bold">Vendor MAC</h6>
+                        <p class="card-text display-6 fw-bold text-success">{{ vendor_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-lg border-0 border-top border-warning border-4">
+                    <div class="card-body">
+                        <h6 class="card-title text-uppercase text-muted small fw-bold">Dynamic MAC</h6>
+                        <p class="card-text display-6 fw-bold text-warning">{{ dynamic_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-lg border-0 border-top border-secondary border-4">
+                    <div class="card-body">
+                        <h6 class="card-title text-uppercase text-muted small fw-bold">Unknown MAC</h6>
+                        <p class="card-text display-6 fw-bold text-secondary">{{ unknown_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>   
+
+    <table class="table table-striped table-bordered mt-3 table-hover shadow-lg">
         <thead>
             <tr class="table-primary">
                 <th>IP Address</th>
