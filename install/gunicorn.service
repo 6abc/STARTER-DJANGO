@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn for __APP_NAME__
+After=network.target
+
+[Service]
+User=__APP_USER__
+Group=www-data
+WorkingDirectory=__BASE_DIR__/project
+EnvironmentFile=__BASE_DIR__/project/.env
+ExecStart=__BASE_DIR__/venv/bin/gunicorn core.wsgi:application \
+          --bind unix:/run/__APP_NAME__.sock \
+          --workers 3
+
+[Install]
+WantedBy=multi-user.target

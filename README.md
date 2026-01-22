@@ -63,5 +63,15 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+## Install
+
+Open a terminal and run:
+
+```bash
+git clone https://github.com/6abc/STARTER-DJANGO.git -b network
+cd STARTER-DJANGO/install
+sudo ./install.sh
+```
+
 ---
 
