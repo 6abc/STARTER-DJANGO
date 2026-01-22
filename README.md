@@ -56,7 +56,7 @@ source envro/bin/activate
 Open a terminal and run:
 
 ```bash
-git clone https://github.com/6abc/STARTER-DJANGO.git
+git clone https://github.com/6abc/STARTER-DJANGO.git -b network
 cd STARTER-DJANGO
 pip install -r requirements.txt
 python manage.py migrate
